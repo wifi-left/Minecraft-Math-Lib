@@ -1,0 +1,9 @@
+{
+    "mathlib.command.error.noSuchOperating": "这是一个无效的操作",
+    "mathlib.command.error.modifyError": "在获取值时候出错。",
+    "mathlib.command.error.calcError": "在计算时出错。",
+    "mathlib.command.error.unknown": "未知错误发生。请检查您的日志。",
+    "mathlib.command.msg.calcResult": "%s 的计算结果为 %s",
+    "mathlib.command.error.minMoreThanMax": "最小值 %s 大于最大值 %s",
+    "mathlib.command.msg.randomResult": "随机值: %s"
+}
