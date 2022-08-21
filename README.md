@@ -1,9 +1,35 @@
-# Fabric Example Mod
+# Minecraft Math Lib
+A mod that provides some math functions that can be used in-game more easily. (suitable for datapack makers)
+# Futures
+## Commands
+### Math
 
-## Setup
+Usage:
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+`/math <name1> <objective1> <operation> <name2> <objective2>` 
+perform operations.
+The following operations are currently supported:
 
-## License
+ - Plus (`+`)
+ - Minus (`-`)
+ - Multiplication (`"*"`)
+ - Division (`"/"`)
+ - Max (`max`)
+ - Min (`min`)
+ - Average (`middle`)
+ - `=cos` / `=sin` / `=tan` / `=sqrt`
+   Please note: these will change the value of the first provided scoreboard
+ - Mod (`"%"`)
+ - Power (`"^"`)
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+The output result will be output in the chat bar. If the value of the scoreboard has not been modified, you can store it with execute store result.
+If the value is modified this value will remain constant.
+**Note that all operations are rounded up, as the Minecraft scoreboard doesn't support decimals!**
+
+### Random
+
+Usage:
+
+`/random <min> <max>`
+
+Get a random integer between the minimum and maximum values.
