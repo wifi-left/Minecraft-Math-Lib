@@ -3,7 +3,7 @@
     "mathlib.command.error.modifyError": "Error when getting the value.",
     "mathlib.command.error.calcError": "Error when calculating.",
     "mathlib.command.error.unknown": "Unknown errors happened. Please check out your logs.",
-    "mathlib.command.msg.calcResult": "The result of %s: %s",
+    "mathlib.command.msg.calcResult": "The result: %s",
     "mathlib.command.error.minMoreThanMax": "The minimum value provided %s is greater than the maximum %s.",
     "mathlib.command.msg.randomResult": "Random value: %s"
 }

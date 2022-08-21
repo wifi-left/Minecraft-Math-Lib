@@ -29,8 +29,8 @@ public class CommandMath {
     // new SimpleCommandExceptionType(new
     // TranslatableText("commands.editfunction.failed.modNotInstalled"));
     public static final SuggestionProvider<ServerCommandSource> getOperatingSuggestion = (ctx, builder) -> {
-        String[] operatings = { "+", "-", "*", "/", "%", "^", "min", "max", "middle", "=cos", "=tan", "=sin", "=abs",
-                "=sqrt" };
+        String[] operatings = { "+", "-", "\"*\"", "\"/\"", "\"%\"", "\"^\"", "min", "max", "middle", "\"=cos\"", "\"=tan\"", "\"=sin\"", "\"=abs\"",
+                "\"=sqrt\"" };
         for (int i = 0; i < operatings.length; i++) {
             builder.suggest(operatings[i]);
         }
@@ -46,86 +46,121 @@ public class CommandMath {
                                         .suggests(getOperatingSuggestion)
                                         .then(argument("name2", ScoreHolderArgumentType.scoreHolder())
                                                 .then(argument("objective2",
-                                                        ScoreboardObjectiveArgumentType.scoreboardObjective()))
-                                                .executes(command -> {
-                                                    String operating = StringArgumentType.getString(command,
-                                                            "operating");
-                                                    String name1 = ScoreHolderArgumentType.getScoreHolder(command,
-                                                            "name1");
-                                                    String name2 = ScoreHolderArgumentType.getScoreHolder(command,
-                                                            "name2");
-                                                    ScoreboardObjective objective1 = ScoreboardObjectiveArgumentType
-                                                            .getObjective(
+                                                        ScoreboardObjectiveArgumentType.scoreboardObjective())
+                                                        .executes(command -> {
+                                                            String operating = StringArgumentType.getString(command,
+                                                                    "operating");
+                                                            String name1 = ScoreHolderArgumentType.getScoreHolder(
                                                                     command,
-                                                                    "objective1");
-                                                    ScoreboardObjective objective2 = ScoreboardObjectiveArgumentType
-                                                            .getObjective(
+                                                                    "name1");
+                                                            String name2 = ScoreHolderArgumentType.getScoreHolder(
                                                                     command,
-                                                                    "objective2");
-                                                    int value1 = objective1.getScoreboard()
-                                                            .getPlayerScore(name1, objective1)
-                                                            .getScore();
-                                                    int value2 = objective2.getScoreboard()
-                                                            .getPlayerScore(name2, objective2)
-                                                            .getScore();
-                                                    int result = 0;
-                                                    switch (operating) {
-                                                        case "+":
-                                                            result = value1 + value2;
-                                                            break;
-                                                        case "-":
-                                                            result = value1 - value2;
-                                                            break;
-                                                        case "*":
-                                                            result = value1 * value2;
-                                                            break;
-                                                        case "/":
-                                                            result = value1 / value2;
-                                                            break;
-                                                        case "^":
-                                                            result = (int) Math.pow(value1, value2);
-                                                            break;
-                                                        case "%":
-                                                            result = value1 % value2;
-                                                            break;
-                                                        case "min":
-                                                            result = Math.min(value1, value2);
-                                                            break;
-                                                        case "max":
-                                                            result = Math.max(value1, value2);
-                                                            break;
-                                                        case "middle":
-                                                            result = (value1 + value2) / 2;
-                                                            break;
-                                                        case "=sin":
-                                                            result = (int) Math.sin(value1);
-                                                            return 1;
-                                                        case "=cos":
-                                                            result = (int) Math.cos(value1);
-                                                            return 1;
+                                                                    "name2");
+                                                            ScoreboardObjective objective1 = ScoreboardObjectiveArgumentType
+                                                                    .getObjective(
+                                                                            command,
+                                                                            "objective1");
+                                                            ScoreboardObjective objective2 = ScoreboardObjectiveArgumentType
+                                                                    .getObjective(
+                                                                            command,
+                                                                            "objective2");
+                                                            int value1 = objective1.getScoreboard()
+                                                                    .getPlayerScore(name1, objective1)
+                                                                    .getScore();
+                                                            int value2 = objective2.getScoreboard()
+                                                                    .getPlayerScore(name2, objective2)
+                                                                    .getScore();
+                                                            int result = 0;
+                                                            switch (operating) {
+                                                                case "+":
+                                                                    result = value1 + value2;
+                                                                    break;
+                                                                case "-":
+                                                                    result = value1 - value2;
+                                                                    break;
+                                                                case "*":
+                                                                    result = value1 * value2;
+                                                                    break;
+                                                                case "/":
+                                                                    result = value1 / value2;
+                                                                    break;
+                                                                case "^":
+                                                                    result = (int) Math.pow(value1, value2);
+                                                                    break;
+                                                                case "%":
+                                                                    result = value1 % value2;
+                                                                    break;
+                                                                case "min":
+                                                                    result = Math.min(value1, value2);
+                                                                    break;
+                                                                case "max":
+                                                                    result = Math.max(value1, value2);
+                                                                    break;
+                                                                case "middle":
 
-                                                        case "=tan":
-                                                            result = (int) Math.tan(value1);
-                                                            return 1;
+                                                                    result = (value1 + value2) / 2;
+                                                                    break;
+                                                                case "=sin":
+                                                                    result = (int) Math.sin(value2);
+                                                                    command.getSource()
+                                                                            .sendFeedback(Text.translatable(
+                                                                                    "mathlib.command.msg.calcResult",
+                                                                                    result), false);
+                                                                    
+                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    return result;
+                                                                case "=cos":
+                                                                    result = (int) Math.cos(value2);
+                                                                    command.getSource()
+                                                                            .sendFeedback(Text.translatable(
+                                                                                    "mathlib.command.msg.calcResult",
+                                                                                    result), false);
+                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    return result;
 
-                                                        case "=abs":
-                                                            result = (int) Math.abs(value1);
-                                                            return 1;
+                                                                case "=tan":
+                                                                    result = (int) Math.tan(value2);
+                                                                    command.getSource()
+                                                                            .sendFeedback(Text.translatable(
+                                                                                    "mathlib.command.msg.calcResult",
+                                                                                    result), false);
+                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    return result;
 
-                                                        case "=sqrt":
-                                                            result = (int) Math.sqrt(value1);
-                                                            return 1;
+                                                                case "=abs":
+                                                                    result = (int) Math.abs(value2);
+                                                                    command.getSource()
+                                                                            .sendFeedback(Text.translatable(
+                                                                                    "mathlib.command.msg.calcResult",
+                                                                                    result), false);
+                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    return result;
 
-                                                        default:
-                                                            throw new SimpleCommandExceptionType(
-                                                                    Text.translatable(
-                                                                            "mathlib.command.error.noSuchOperating"))
-                                                                    .create();
-                                                        // return 0;
-                                                    }
-                                                    // command.getSource().sendFeedback(message, broadcastToOps);
-                                                    // command.getSource().send(message, broadcastToOps);
-                                                    return result;
-                                                }))))));
+                                                                case "=sqrt":
+                                                                    result = (int) Math.sqrt(value2);
+                                                                    command.getSource()
+                                                                            .sendFeedback(Text.translatable(
+                                                                                    "mathlib.command.msg.calcResult",
+                                                                                    result), false);
+
+                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    return result;
+
+                                                                default:
+                                                                    throw new SimpleCommandExceptionType(
+                                                                            Text.translatable(
+                                                                                    "mathlib.command.error.noSuchOperating"))
+                                                                            .create();
+                                                                // return 0;
+                                                            }
+                                                            // command.getSource().sendFeedback(message,
+                                                            // broadcastToOps);
+                                                            // command.getSource().send(message, broadcastToOps);
+                                                            command.getSource()
+                                                                    .sendFeedback(Text.translatable(
+                                                                            "mathlib.command.msg.calcResult", result),
+                                                                            false);
+                                                            return result;
+                                                        })))))));
     }
 }
