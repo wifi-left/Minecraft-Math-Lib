@@ -8,7 +8,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 // import static net.minecraft.command.argument.ScoreHolderArgumentType;
 import static net.minecraft.server.command.CommandManager.argument;
 
-import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.ScoreHolderArgumentType;
 import net.minecraft.command.argument.ScoreboardObjectiveArgumentType;
 import net.minecraft.scoreboard.ScoreboardObjective;
@@ -17,7 +16,6 @@ import static net.minecraft.server.command.CommandManager.literal;
 import net.minecraft.server.command.ServerCommandSource;
 
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 // import net.minecraft.text.TranslatableText;
 public class CommandMath {
@@ -29,7 +27,8 @@ public class CommandMath {
     // new SimpleCommandExceptionType(new
     // TranslatableText("commands.editfunction.failed.modNotInstalled"));
     public static final SuggestionProvider<ServerCommandSource> getOperatingSuggestion = (ctx, builder) -> {
-        String[] operatings = { "+", "-", "\"*\"", "\"/\"", "\"%\"", "\"^\"", "min", "max", "middle", "\"=cos\"", "\"=tan\"", "\"=sin\"", "\"=abs\"",
+        String[] operatings = { "+", "-", "\"*\"", "\"/\"", "\"%\"", "\"^\"", "min", "max", "middle", "\"=cos\"",
+                "\"=tan\"", "\"=sin\"", "\"=abs\"",
                 "\"=sqrt\"" };
         for (int i = 0; i < operatings.length; i++) {
             builder.suggest(operatings[i]);
@@ -106,8 +105,10 @@ public class CommandMath {
                                                                             .sendFeedback(Text.translatable(
                                                                                     "mathlib.command.msg.calcResult",
                                                                                     result), false);
-                                                                    
-                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+
+                                                                    objective1.getScoreboard()
+                                                                            .getPlayerScore(name1, objective1)
+                                                                            .setScore(result);
                                                                     return result;
                                                                 case "=cos":
                                                                     result = (int) Math.cos(value2);
@@ -115,7 +116,9 @@ public class CommandMath {
                                                                             .sendFeedback(Text.translatable(
                                                                                     "mathlib.command.msg.calcResult",
                                                                                     result), false);
-                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    objective1.getScoreboard()
+                                                                            .getPlayerScore(name1, objective1)
+                                                                            .setScore(result);
                                                                     return result;
 
                                                                 case "=tan":
@@ -124,7 +127,9 @@ public class CommandMath {
                                                                             .sendFeedback(Text.translatable(
                                                                                     "mathlib.command.msg.calcResult",
                                                                                     result), false);
-                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    objective1.getScoreboard()
+                                                                            .getPlayerScore(name1, objective1)
+                                                                            .setScore(result);
                                                                     return result;
 
                                                                 case "=abs":
@@ -133,7 +138,9 @@ public class CommandMath {
                                                                             .sendFeedback(Text.translatable(
                                                                                     "mathlib.command.msg.calcResult",
                                                                                     result), false);
-                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    objective1.getScoreboard()
+                                                                            .getPlayerScore(name1, objective1)
+                                                                            .setScore(result);
                                                                     return result;
 
                                                                 case "=sqrt":
@@ -143,7 +150,9 @@ public class CommandMath {
                                                                                     "mathlib.command.msg.calcResult",
                                                                                     result), false);
 
-                                                                    objective1.getScoreboard().getPlayerScore(name1, objective1).setScore(result);
+                                                                    objective1.getScoreboard()
+                                                                            .getPlayerScore(name1, objective1)
+                                                                            .setScore(result);
                                                                     return result;
 
                                                                 default:

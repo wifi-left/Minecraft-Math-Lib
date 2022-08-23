@@ -23,6 +23,8 @@ public final class MathLib implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			CommandMath.register(dispatcher);
 			CommandRandom.register(dispatcher);
+			// TODO: 
+			// CommandStoreBlockInfo.register(dispatcher);
 		});
 
 		LOGGER.info("Loaded Minecraft Math Lib.");

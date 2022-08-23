@@ -30,6 +30,6 @@ If the value is modified this value will remain constant.
 
 Usage:
 
-`/random <min> <max>`
+`/random <min> <max>` or `/random <min_name> <min_objective> <max_name> <max_objective>`
 
 Get a random integer between the minimum and maximum values.
